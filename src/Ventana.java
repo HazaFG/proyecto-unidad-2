@@ -22,5 +22,7 @@ public class Ventana extends JFrame {
         boton.setLocation(50,50);
         boton.setBackground(Color.BLUE);
         fondo.add(boton);
+
+        //HOLA
     }
 }
