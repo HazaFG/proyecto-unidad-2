@@ -8,11 +8,19 @@ public class Ventana extends JFrame {
         this.setTitle("HOLA");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setBackground(Color.RED);
+        //this.setLayout(null);
 
         JPanel fondo = new JPanel();
         fondo.setOpaque(true);
-        this.setBackground(Color.RED);
-
+        fondo.setBackground(Color.RED);
+        fondo.setLayout(null);
         this.add(fondo);
+
+        JButton boton = new JButton("Hola");
+        boton.setSize(80,80);
+        boton.setOpaque(true);
+        boton.setLocation(50,50);
+        boton.setBackground(Color.BLUE);
+        fondo.add(boton);
     }
 }
