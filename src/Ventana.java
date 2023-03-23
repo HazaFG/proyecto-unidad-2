@@ -7,7 +7,10 @@ public class Ventana extends JFrame {
         this.setSize(600,600);
         this.setTitle("a");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setBackground(Color.RED);
 
+        JPanel fondo = new JPanel();
+        fondo.setOpaque(true);
         this.setBackground(Color.RED);
     }
 }
