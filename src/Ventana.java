@@ -42,6 +42,81 @@ public class Ventana extends JFrame {
         this.revalidate();
     }
 
+    //MENU
+    public JMenuBar menu(){
+        //BARRA
+        JMenuBar menuBar = new JMenuBar();
+
+        //MENUS
+        JMenu cuenta = new JMenu("Cuenta");
+        JMenu usuarios = new JMenu("Usuarios");
+        JMenu ayuda = new JMenu("Ayuda");
+
+        //ITEMS
+        JMenuItem miCuenta = new JMenuItem("Mi Cuenta");
+        JMenuItem cerrarSesion = new JMenuItem("Cerrar Sesión");
+
+        JMenuItem listaU = new JMenuItem("Lista de Usuarios");
+        JMenuItem crearU = new JMenuItem("Crear Usuarios");
+
+        JMenuItem comoCrear = new JMenuItem("¿Como Crear Usuarios?");
+
+        //AGREGAR ITEM AL MENU
+        cuenta.add(miCuenta);
+        cuenta.addSeparator();
+        cuenta.add(cerrarSesion);
+
+        usuarios.add(listaU);
+        usuarios.addSeparator();
+        usuarios.add(crearU);
+
+        ayuda.add(comoCrear);
+
+        //AGREGAR MENUS A LA BARRA
+        menuBar.add(cuenta);
+        menuBar.add(usuarios);
+        menuBar.add(ayuda);
+
+        //MENU A LA VENTANA
+        setJMenuBar(menuBar);
+
+        //PROPIEDADES VENTANA
+        setLocationRelativeTo(null);
+        setVisible(true);
+
+        miCuenta.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel(modificarCuenta());
+            }
+        });
+
+        cerrarSesion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel(cerrarSesion());
+            }
+        });
+
+        listaU.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel(listaUsuarios());
+            }
+        });
+
+        crearU.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel(crearUsuario());
+            }
+        });
+
+        comoCrear.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel(comoCrearUsuario());
+            }
+        });
+
+        return menuBar;
+    }
+
     //SPLASH
 
 
@@ -78,6 +153,9 @@ public class Ventana extends JFrame {
         panel.setLocation(0, 0);
         panel.setLayout(null);
         panel.setBackground(Color.decode("#C45EDF"));
+
+        JMenuBar menuBar = menu();
+        this.setJMenuBar(menuBar);
 
         JButton btnAdd = new JButton("tercera ventana");
         btnAdd.setSize(250,40);
