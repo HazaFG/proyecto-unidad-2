@@ -117,17 +117,13 @@ public class Ventana extends JFrame {
         return menuBar;
     }
 
-    //SPLASH
-
-
-
     //ACCEDER CUENTA
     public JPanel acceder() {
         JPanel panel = new JPanel();
         panel.setSize(600, 600);
         panel.setLocation(0, 0);
         panel.setLayout(null);
-        panel.setBackground(Color.decode("#5ED6DF"));
+        panel.setBackground(Color.decode("#7A984C"));
 
         JButton btnAccess = new JButton("A C C E D E R");
         btnAccess.setSize(250,40);
