@@ -129,6 +129,21 @@ public class Ventana extends JFrame {
         //menu().removeAll();
         menu().setVisible(false);
 
+        /*
+        JLabel correo = new JLabel("Correo Electronico");
+        correo.setSize(100,100);
+        correo.setLocation(50,50);
+        panel.add(correo);
+        */
+
+        ImageIcon imagen = new ImageIcon("loginFoto.png");
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+        // Agrega la etiqueta al panel
+        panel.add(etiqueta);
+        etiqueta.setSize(500,500);
+        etiqueta.setLocation(0,0);
+
         JTextField usuario = new JTextField();
         usuario.setSize(250,40);
         usuario.setLocation(120,100);
