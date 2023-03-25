@@ -136,28 +136,31 @@ public class Ventana extends JFrame {
         panel.add(correo);
         */
 
-        ImageIcon imagen = new ImageIcon("loginFoto.png");
+        //Imagen de fondo
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/loginIcon.png");
         // Crea el objeto JLabel
         JLabel etiqueta = new JLabel(imagen);
+
         // Agrega la etiqueta al panel
-        panel.add(etiqueta);
-        etiqueta.setSize(500,500);
+        etiqueta.setSize(600,600);
         etiqueta.setLocation(0,0);
 
         JTextField usuario = new JTextField();
-        usuario.setSize(250,40);
-        usuario.setLocation(120,100);
+        usuario.setSize(267,28);
+        usuario.setLocation(167,307);
         panel.add(usuario);
 
         JPasswordField pass = new JPasswordField();
-        pass.setSize(250,40);
-        pass.setLocation(120,150);
+        pass.setSize(267,28);
+        pass.setLocation(167,384);
         panel.add(pass);
 
         JButton cancelar = new JButton("Cancelar");
-        cancelar.setSize(250,40);
-        cancelar.setLocation(30,205);
+        cancelar.setSize(114,31);
+        cancelar.setLocation(167,452);
         panel.add(cancelar);
+
+        panel.add(etiqueta);
 
         cancelar.addActionListener(new ActionListener() {
 
@@ -172,8 +175,8 @@ public class Ventana extends JFrame {
         });
 
         JButton btnAccess = new JButton("Iniciar Sesión");
-        btnAccess.setSize(250,40);
-        btnAccess.setLocation(300,205);
+        btnAccess.setSize(114,31);
+        btnAccess.setLocation(320,452);
         panel.add(btnAccess);
 
         btnAccess.addActionListener(new ActionListener() {
