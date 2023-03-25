@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 public class Ventana extends JFrame {
     private JPanel panelActual;
     private JPanel panelAnterior;
+    String nombreUsuario="";
 
     public Ventana() {
         //PROPIEDADES VENTANA
@@ -92,7 +93,7 @@ public class Ventana extends JFrame {
 
         cerrarSesion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                cambiarPanel(cerrarSesion());
+                cambiarPanel(acceder());
             }
         });
 
@@ -125,16 +126,58 @@ public class Ventana extends JFrame {
         panel.setLayout(null);
         panel.setBackground(Color.decode("#7A984C"));
 
-        JButton btnAccess = new JButton("A C C E D E R");
+        //menu().removeAll();
+        menu().setVisible(false);
+
+        JTextField usuario = new JTextField();
+        usuario.setSize(250,40);
+        usuario.setLocation(120,100);
+        panel.add(usuario);
+
+        JPasswordField pass = new JPasswordField();
+        pass.setSize(250,40);
+        pass.setLocation(120,150);
+        panel.add(pass);
+
+        JButton cancelar = new JButton("Cancelar");
+        cancelar.setSize(250,40);
+        cancelar.setLocation(30,205);
+        panel.add(cancelar);
+
+        cancelar.addActionListener(new ActionListener() {
+
+            //BORRA EL TEXTO AL CANCELAR
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuario.setText("");
+                pass.setText("");
+
+            }
+
+        });
+
+        JButton btnAccess = new JButton("Iniciar Sesión");
         btnAccess.setSize(250,40);
-        btnAccess.setLocation(120,205);
+        btnAccess.setLocation(300,205);
         panel.add(btnAccess);
 
         btnAccess.addActionListener(new ActionListener() {
 
+            //VALIDACIÓN DE DATOS
             @Override
             public void actionPerformed(ActionEvent e) {
-                cambiarPanel(cuenta());
+                String nombre = usuario.getText();
+                nombreUsuario=nombre;
+                String password = new String(pass.getPassword());
+
+                if(nombre.equals(password)) {
+                    JOptionPane.showMessageDialog(null, "BIENVENIDO "+nombre,"BIENVENIDO",JOptionPane.CLOSED_OPTION);
+                    cambiarPanel(cuenta());
+
+                }else {
+                    JOptionPane.showMessageDialog(null, "EL USUARIO Y CONTRASEÑA NO COINCIDE");
+
+                }
             }
 
         });
@@ -153,19 +196,11 @@ public class Ventana extends JFrame {
         JMenuBar menuBar = menu();
         this.setJMenuBar(menuBar);
 
-        JButton btnAdd = new JButton("tercera ventana");
-        btnAdd.setSize(250,40);
-        btnAdd.setLocation(120, 390);
-        panel.add(btnAdd);
+        JLabel l1 = new JLabel("Bienvenido "+nombreUsuario);
+        l1.setSize(250,40);
+        l1.setLocation(120, 390);
+        panel.add(l1);
 
-        btnAdd.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cambiarPanel(modificarCuenta());
-            }
-
-        });
 
         return panel;
     }
@@ -178,41 +213,60 @@ public class Ventana extends JFrame {
         panel.setLayout(null);
         panel.setBackground(Color.decode("#eeeeee"));
 
-        JButton btnAdd = new JButton("cuarta ventana");
-        btnAdd.setSize(250,40);
-        btnAdd.setLocation(120, 390);
-        panel.add(btnAdd);
+        JTextField tf1 = new JTextField();
+        tf1.setSize(250,40);
+        tf1.setLocation(120, 100);
+        panel.add(tf1);
 
-        btnAdd.addActionListener(new ActionListener() {
+        JTextField tf2 = new JTextField();
+        tf2.setSize(250,40);
+        tf2.setLocation(120, 150);
+        panel.add(tf2);
+
+        JTextField tf3 = new JTextField();
+        tf3.setSize(250,40);
+        tf3.setLocation(120, 200);
+        panel.add(tf3);
+
+        JTextField tf4 = new JTextField();
+        tf4.setSize(250,40);
+        tf4.setLocation(120, 250);
+        panel.add(tf4);
+
+        JButton btn1 = new JButton("Cancelar");
+        btn1.setSize(250,40);
+        btn1.setLocation(50, 300);
+        panel.add(btn1);
+
+        btn1.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                cambiarPanel(cerrarSesion());
+                cambiarPanel(cuenta());
             }
 
         });
 
-        return panel;
-    }
+        JButton btn2 = new JButton("Actualizar Datos");
+        btn2.setSize(250,40);
+        btn2.setLocation(300, 300);
+        panel.add(btn2);
 
-    //CERRAR SESIÓN
-    public JPanel cerrarSesion() {
-        JPanel panel = new JPanel();
-        panel.setSize(600, 600);
-        panel.setLocation(0, 0);
-        panel.setLayout(null);
-        panel.setBackground(Color.green);
-
-        JButton btnAdd = new JButton("quinta ventana");
-        btnAdd.setSize(250,40);
-        btnAdd.setLocation(120, 390);
-        panel.add(btnAdd);
-
-        btnAdd.addActionListener(new ActionListener() {
+        btn2.addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                cambiarPanel(listaUsuarios());
+
+                if(1==1) {
+                    JOptionPane.showMessageDialog(null, "Información actualizada");
+                    cambiarPanel(cuenta());
+
+                }else {
+                    JOptionPane.showMessageDialog(null, "La información no se ha podido actualizar");
+
+                }
+
+                cambiarPanel(modificarCuenta());
             }
 
         });

@@ -7,6 +7,7 @@ public class Splash extends JDialog {
     private JProgressBar barra;
     private JLabel l2;
 
+    //PROPIEDADES DIALOOGO
     public Splash() {
         inicio();
         setSize(600,600);
@@ -17,6 +18,7 @@ public class Splash extends JDialog {
         inicioHilo();
     }
 
+    //PROPIEDADES ELEMENTOS
     private void inicio() {
         JLabel l1 = new JLabel("Splash Screen");
         l1.setFont(new Font("Tahoma", Font.PLAIN,18));
@@ -44,14 +46,16 @@ public class Splash extends JDialog {
             int x = 0;
             String texto = " ";
 
+            //ACCION DE CARGA
             public void run(){
                 try{
                     while(x<=100){
                         barra.setValue(x);
                         porcentaje.setText(x+"%");
                         x++;
-                        Thread.sleep(40);
+                        Thread.sleep(20);
 
+                        //MENSAJES DE CARGA
                         if(x==5){
                             texto="Le recomendamos tomar matcha";
                             l2.setText(texto);
@@ -70,6 +74,7 @@ public class Splash extends JDialog {
                         }
                     }
 
+                    //CIERRA SPLASH, ABRE VENTANA DE ACCIONES
                     dispose();
                     Ventana v1 = new Ventana();
                     v1.setVisible(true);
