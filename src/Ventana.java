@@ -144,7 +144,7 @@ public class Ventana extends JFrame {
         */
 
         //Imagen de fondo
-        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/loginIcon.png");
+        ImageIcon imagen = new ImageIcon("imagenes/loginIcon.png");
         // Crea el objeto JLabel
         JLabel etiqueta = new JLabel(imagen);
 
