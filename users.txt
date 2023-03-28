@@ -1,12 +1,4 @@
 123,123,123,123
-hazael flores,hazaelfg123,hazael@hotmail.com,12345
-christian rodriguez,chrisnux123,christian@gmail.com,12345
 delia vargas,delia1234,12345,123
-pedro castro,pedro123,pedro@gmail.com,12345
-marcos ignacio,marcum123,marcos@gmail.com,12345
-ricardo garayzar,rickywtf123,ricardo@hotmail.com,12345
-pancho al cantar,fransyso123,francisco@gmail.com,12345
 ivan rios,ivanrios_ss,ivan@gmail.com,12345
-jonathan soto,yona123,jonathan@gmail.com,12345
-abdiel flores,abdipapu,abdielfg@gmail.com,kenobi
-abdiel flores,abdipapu,abdielfg@gmail.com,kenobi
+12,12,12,12

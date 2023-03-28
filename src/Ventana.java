@@ -1,11 +1,16 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Ventana extends JFrame {
     private JPanel panelActual;
@@ -334,6 +339,7 @@ public class Ventana extends JFrame {
 
     //MODIFICAR CUENTA PERSONAL
     public JPanel modificarCuenta() {
+
         JPanel panel = new JPanel();
         panel.setSize(600, 600);
         panel.setLocation(0, 0);
@@ -458,22 +464,71 @@ public class Ventana extends JFrame {
         return panel;
     }
 
+    
     //LISTA DE USUARIOS
     public JPanel listaUsuarios() {
+    	
+    	
         JPanel panel = new JPanel();
         panel.setSize(600, 600);
         panel.setLocation(0, 0);
         panel.setLayout(null);
-        panel.setBackground(Color.red);
+        panel.setBackground(Color.decode("#D0E6A5"));
+        
 
+        JLabel bienvenida = new JLabel("Lista de usuarios registrados");
+        bienvenida.setSize(800, 40);
+        bienvenida.setLocation(165, 80);
+        bienvenida.setForeground(Color.decode("#3E4532"));
+        bienvenida.setFont( new Font( "Inter",Font.PLAIN,20));
+        panel.add(bienvenida);
+        
+        
+        JLabel nombre = new JLabel("Editar");
+        nombre.setSize(800, 40);
+        nombre.setLocation(147, 160);
+        nombre.setForeground(Color.decode("#3E4532"));
+        nombre.setFont( new Font( "Inter",Font.PLAIN,17));
+        panel.add(nombre);
+        
+        JLabel editar = new JLabel("Nombre");
+        editar.setSize(800, 40);
+        editar.setLocation(80, 280);
+        editar.setForeground(Color.decode("#3E4532"));
+        editar.setFont( new Font( "Inter",Font.PLAIN,17));
+        panel.add(editar);
+        
+        JLabel usuario = new JLabel("Usuario");
+        usuario.setSize(800, 40);
+        usuario.setLocation(245, 280);
+        usuario.setForeground(Color.decode("#3E4532"));
+        usuario.setFont( new Font( "Inter",Font.PLAIN,17));
+        panel.add(usuario);
+        
+        JLabel Accion = new JLabel("Acción");
+        Accion.setSize(800, 40);
+        Accion.setLocation(425, 280);
+        Accion.setForeground(Color.decode("#3E4532"));
+        Accion.setFont( new Font( "Inter",Font.PLAIN,17));
+        panel.add(Accion);
+        
+        JLabel powered = new JLabel("Powered by Andrea & Hazael");
+        powered.setSize(800, 40);
+        powered.setLocation(205, 500);
+        powered.setForeground(Color.decode("#3E4532"));
+        powered.setFont( new Font( "Inter",Font.PLAIN,13));
+        panel.add(powered);
+        
         //Imagen de fondo
-        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/editarUsuario.png");
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/editarUsuariio.png");
         // Crea el objeto JLabel
         JLabel etiqueta = new JLabel(imagen);
 
         // Agrega la etiqueta al panel
         etiqueta.setSize(600, 600);
         etiqueta.setLocation(-8, -40);
+        
+        
 
         //JCOMBOBOX USUARIO
         String[] fila;
@@ -518,29 +573,35 @@ public class Ventana extends JFrame {
 
         comboBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String selectedData = (String) comboBox.getSelectedItem();
-                btn1.setText("Editar a "+selectedData);
+            	btn1.setEnabled(true);
+
+                String usuarioSeleccionado = (String) comboBox.getSelectedItem();
+                btn1.setText("Editar a "+usuarioSeleccionado);
+
+                nombreUsuarioDos = usuarioSeleccionado;
             }
         });
         //IMAGEN DE FONDO
-        panel.add(etiqueta);
 
+        
         //TABLA ------------------------------------------------------------------------------------------------------------------------------------------------
+        
+        /*
+        setPreferredSize(new Dimension(200, 200));
 
         // Crear modelo de la tabla
-        DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("Nombre");
-        model.addColumn("Usuario");
-        model.addColumn("Correo");
-        model.addColumn("Password");
+        DefaultTableModel modeloTabla = new DefaultTableModel();
+        modeloTabla.addColumn("Nombre");
+        modeloTabla.addColumn("Usuario");
+        modeloTabla.addColumn("Accion");
 
         // Leer datos del archivo y añadirlos al modelo de la tabla
         try {
             BufferedReader br = new BufferedReader(new FileReader("proyecto-unidad-2/users.txt"));
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] data = line.split(",");
-                model.addRow(data);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                modeloTabla.addRow(datos);
             }
             br.close();
         } catch (IOException e) {
@@ -548,21 +609,159 @@ public class Ventana extends JFrame {
         }
 
         // Crear la tabla
-        JTable table = new JTable(model);
+        JTable tabla = new JTable(modeloTabla);
+
+        // Ajustar tamaño de las columnas
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 
         // Añadir la tabla a un JScrollPane para poder hacer scroll si es necesario
-        JScrollPane scrollPane = new JScrollPane(table);
-        panel.add(scrollPane);
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        scrollPane.setBounds(38, 285, 509, 192);
+        add(scrollPane);
+        
+        // ----------------------------------------------------------------------------------------------------------------------------
+        
+        // Crear botón para eliminar fila seleccionada de la tabla
+        JButton btnEliminarFila = new JButton("Eliminar Fila");
+        btnEliminarFila.setBounds(50, 50, 120, 30);
+        add(btnEliminarFila);
+
+        // Añadir acción al botón para eliminar la fila seleccionada de la tabla
+        btnEliminarFila.addActionListener(e -> {
+            DefaultTableModel modelo = (DefaultTableModel) tabla.getModel();
+            int filaSeleccionada = tabla.getSelectedRow();
+            if (filaSeleccionada >= 0) {
+                modelo.removeRow(filaSeleccionada);
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor seleccione una fila para eliminar.");
+            }
+        });
+        */
+        
+        // Creamos el modelo de la tabla
+        
+        //Creamos el modelo de la tabla
+        
+        
+        
+        final JTable tabla;
+        DefaultTableModel modelo;
+        
+        modelo = new DefaultTableModel() {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                return columnIndex == 0 ? JButton.class : Object.class;
+            }
+        };
+
+        // Creamos la tabla con el modelo de datos
+        tabla = new JTable(modelo); 
+        tabla.setVisible(true);
+        
+        JScrollPane scrollPane = new JScrollPane(tabla);
+        scrollPane.setBounds(38, 285, 509, 192);
+        
+        Container container = new Container();
+		container.add(scrollPane);
+        
+        // Creamos la tabla con el modelo de datos
+        //tabla = new JTable(modelo);
+        
+        // Agregamos las columnas al modelo de la tabla
+        modelo.addColumn("Nombre Completo");
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Eliminar");
+
+
+        
+        // Cargamos los datos desde el archivo de texto
+        try {
+            FileReader archivo = new FileReader("proyecto-unidad-2/users.txt");
+            BufferedReader br = new BufferedReader(archivo);
+            String linea;
+            while ((linea = br.readLine()) != null) {
+                String[] datos = linea.split(",");
+                Object[] fila1 = {datos[0], datos[1], new JButton("ELIMINAR").getText()};
+                modelo.addRow(fila1);
+            }
+            br.close();
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "Error al leer el archivo");
+        }
+
+        // Ajustar tamaño de las columnas
+        tabla.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+
+     // Agregamos un listener al botón de eliminar
+        tabla.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int columna = tabla.columnAtPoint(e.getPoint());
+                int fila = tabla.rowAtPoint(e.getPoint());
+
+                if (columna == 2) {
+                    int respuesta = JOptionPane.showConfirmDialog(null, "¿Desea eliminar la fila?", "Confirmar", JOptionPane.YES_NO_OPTION);
+                    if (respuesta == JOptionPane.YES_OPTION) {
+                        // Obtener usuario de la fila seleccionada
+                        String usuario = (String) modelo.getValueAt(fila, 1);
+
+                        // Eliminar fila de la tabla
+                        modelo.removeRow(fila);
+
+                        // Eliminar usuario del archivo de texto
+                        try {
+                            FileReader archivo = new FileReader("proyecto-unidad-2/users.txt");
+                            BufferedReader br = new BufferedReader(archivo);
+                            String linea;
+                            StringBuilder contenido = new StringBuilder();
+                            while ((linea = br.readLine()) != null) {
+                                if (linea.contains(usuario)) {
+                                    continue; // Saltar la línea del usuario que se eliminó
+                                }
+                                contenido.append(linea).append("\n");
+                            }
+                            br.close();
+
+                            FileWriter archivoNuevo = new FileWriter("proyecto-unidad-2/users.txt");
+                            archivoNuevo.write(contenido.toString());
+                            archivoNuevo.close();
+                        } catch (IOException ex) {
+                            JOptionPane.showMessageDialog(null, "Error al leer o escribir el archivo");
+                        }
+                    }
+                }
+            }
+        });
+        
+        
+        tabla.setBounds(38, 315, 509, 192);
+        panel.add(tabla);
+        
+        
+        
+        // Añadir la tabla a un JScrollPane para poder hacer scroll si es necesario
+        //add(scrollPane);
+
         
         //FIN TABLA --------------------------------------------------------------------------------------------------------------------------------------------
-
-
 
         panel.repaint();
         panel.revalidate();
         return panel;
     }
+    
+    /*
+    panelDePestañas.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+            // Obtener el panel actual
+            JPanel panelActual = (JPanel) panelDePestañas.getSelectedComponent();
 
+            // Remover la tabla del panel actual
+            panelActual.removeAll();
+        }
+    });
+*/
 
     //EDITAR USUARIO
     public JPanel editarUsuario() {
@@ -571,6 +770,8 @@ public class Ventana extends JFrame {
         panel.setLocation(0, 0);
         panel.setLayout(null);
         panel.setBackground(Color.decode("#eeeeee"));
+        
+        listaUsuarios().setVisible(false);
 
         JTextField tf1 = new JTextField();
         tf1.setSize(294, 22);
@@ -640,16 +841,64 @@ public class Ventana extends JFrame {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	try {
+            	    File file = new File("proyecto-unidad-2/users.txt");
+            	    BufferedReader lector = new BufferedReader(new FileReader(file));
 
-                if (1 == 0) {
-                    JOptionPane.showMessageDialog(null, "Información actualizada");
-                    cambiarPanel(listaUsuarios());
+            	    String linea;
+            	    boolean usuarioEncontrado = false;
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "La información no se ha podido actualizar");
-                    cambiarPanel(panelActual);
-                }
+            	    StringBuilder textoDinamico = new StringBuilder();
 
+    	            System.out.println(nombreUsuarioDos);
+            	    
+            	    while ((linea = lector.readLine()) != null) {
+            	        String[] campo = linea.split(",");
+
+            	        if(campo[0].equals(nombreUsuarioDos)) {
+            	            usuarioEncontrado = true;
+            	            
+            	            System.out.println(nombreUsuarioDos);
+
+            	            String lineaEditada = tf1.getText() + "," + tf2.getText() + "," + tf3.getText() + "," + tf4.getText();
+            	            textoDinamico.append(lineaEditada).append(System.lineSeparator());
+            	        } else {
+            	            textoDinamico.append(linea).append(System.lineSeparator());
+            	        }
+            	        
+            	       
+            	    }
+            	    
+
+            	    lector.close();
+
+            	    if(usuarioEncontrado) {
+            	        // Sobrescribe el archivo con los datos modificados
+            	    	System.out.println("Hola");
+            	        BufferedWriter escritor = new BufferedWriter(new FileWriter(file));
+            	        escritor.write(textoDinamico.toString());
+            	        escritor.close();
+
+            	        JOptionPane.showMessageDialog(null, "Datos modificados");
+            	        cambiarPanel(panelAnterior);
+            	    } else {
+            	        JOptionPane.showMessageDialog(null, "El usuario no se encontró en el archivo.");
+            	    }
+            	} catch (IOException e2) {
+            	    e2.printStackTrace();
+            	}
+
+ 
+            	
+            	/*
+                JOptionPane.showMessageDialog(null, "Información actualizada");
+                cambiarPanel(listaUsuarios());
+
+                
+                JOptionPane.showMessageDialog(null, "La información no se ha podido actualizar");
+                cambiarPanel(panelActual);
+*/
 
             }
 
