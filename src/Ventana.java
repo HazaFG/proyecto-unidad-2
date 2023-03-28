@@ -144,7 +144,7 @@ public class Ventana extends JFrame {
         */
 
         //Imagen de fondo
-        ImageIcon imagen = new ImageIcon("imagenes/loginIcon.png");
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/loginIcon.png");
         // Crea el objeto JLabel
         JLabel etiqueta = new JLabel(imagen);
 
@@ -192,7 +192,7 @@ public class Ventana extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    File file = new File("users.txt");
+                    File file = new File("proyecto-unidad-2/users.txt");
                     BufferedReader lector = new BufferedReader(new FileReader(file));
 
                     String linea;
@@ -228,6 +228,8 @@ public class Ventana extends JFrame {
             }
         });
 
+        panel.revalidate();
+        panel.repaint();
         return panel;
     }
 
@@ -237,17 +239,77 @@ public class Ventana extends JFrame {
         panel.setSize(600, 600);
         panel.setLocation(0, 0);
         panel.setLayout(null);
-        panel.setBackground(Color.decode("#C45EDF"));
+        panel.setBackground(Color.decode("#3E4532"));
 
         JMenuBar menuBar = menu();
         this.setJMenuBar(menuBar);
 
-        JLabel l1 = new JLabel("Bienvenido " + nombreUsuario);
-        l1.setSize(250, 40);
-        l1.setLocation(120, 390);
-        panel.add(l1);
+        JLabel bienvenida = new JLabel("Bienvenido " + nombreUsuario + "!!.");
+        bienvenida.setSize(800, 40);
+        bienvenida.setLocation(33, 72);
+        bienvenida.setForeground(Color.decode("#D0E6A5"));
+        bienvenida.setFont( new Font( "Inter",Font.PLAIN,27));
+        panel.add(bienvenida);
 
+        JLabel sientete = new JLabel("Sientete libre de interactuar con todo lo que ofrece nuestro sistema");
+        sientete.setSize(800, 40);
+        sientete.setLocation(33, 170);
+        sientete.setForeground(Color.decode("#D0E6A5"));
+        sientete.setFont( new Font( "Inter",Font.ITALIC,17));
+        panel.add(sientete);
 
+        JLabel deregistro = new JLabel("de registro de usuarios, puedes pasearte por todo lo que");
+        deregistro.setSize(800, 40);
+        deregistro.setLocation(33, 190);
+        deregistro.setForeground(Color.decode("#D0E6A5"));
+        deregistro.setFont( new Font( "Inter",Font.ITALIC,17));
+        panel.add(deregistro);
+
+        JLabel sistema = new JLabel("nuestro sistema ofrece para ti.");
+        sistema.setSize(800, 40);
+        sistema.setLocation(33, 210);
+        sistema.setForeground(Color.decode("#D0E6A5"));
+        sistema.setFont( new Font( "Inter",Font.ITALIC,17));
+        panel.add(sistema);
+
+        JLabel esperamos = new JLabel("Esperamos tu experiencia sea muy grata!");
+        esperamos.setSize(800, 40);
+        esperamos.setLocation(33, 270);
+        esperamos.setForeground(Color.decode("#D0E6A5"));
+        esperamos.setFont( new Font( "Inter",Font.ITALIC,17));
+        panel.add(esperamos);
+
+        JLabel powered = new JLabel("Powered by Andrea & Hazael");
+        powered.setSize(800, 40);
+        powered.setLocation(194, 480);
+        powered.setForeground(Color.decode("#D0E6A5"));
+        powered.setFont( new Font( "Inter",Font.PLAIN,15));
+        panel.add(powered);
+
+        //IMAGEN PRINCIPAL
+        ImageIcon bienvenidaPlanta = new ImageIcon("proyecto-unidad-2/imagenes/bienvenida.png");
+
+        // Crea el objeto JLabel
+        JLabel etiquetaPlanta = new JLabel(bienvenidaPlanta);
+
+        // Agrega la etiqueta de la planta al panel
+        etiquetaPlanta.setSize(600, 600);
+        etiquetaPlanta.setLocation(-10, -20);
+
+        //IMAGEN DE LA PLANTA
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/planta.png");
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+
+        // Agrega la etiqueta al panel
+        etiqueta.setSize(170, 162);
+        etiqueta.setLocation(200, 420);
+
+        panel.add(etiquetaPlanta);
+        //panel.add(etiqueta);
+
+        panel.repaint();
+        panel.revalidate();
         return panel;
     }
 
@@ -361,10 +423,19 @@ public class Ventana extends JFrame {
         panel.setLayout(null);
         panel.setBackground(Color.red);
 
+        //Imagen de fondo
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/editarUsuario.png");
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+
+        // Agrega la etiqueta al panel
+        etiqueta.setSize(600, 600);
+        etiqueta.setLocation(-8, -40);
+
         //JCOMBOBOX USUARIO
         String[] fila;
         try {
-            File file = new File("users.txt");
+            File file = new File("proyecto-unidad-2/users.txt");
             BufferedReader reader = new BufferedReader(new FileReader(file));
             String line;
             while ((line = reader.readLine()) != null) {
@@ -381,8 +452,8 @@ public class Ventana extends JFrame {
         }
 
         comboBox = new JComboBox<>(data.toArray(new String[0]));
-        comboBox.setSize(300, 25);
-        comboBox.setLocation(50, 50);
+        comboBox.setSize(294, 22);
+        comboBox.setLocation(147, 192);
 
         String usuarioSeleccionado = (String) comboBox.getSelectedItem();
 
@@ -390,8 +461,8 @@ public class Ventana extends JFrame {
 
         //BOTON EDITAR USUARIO SELECCIONADO
         JButton btn1 = new JButton("Editar a "+usuarioSeleccionado);
-        btn1.setSize(250,40);
-        btn1.setLocation(50, 100);
+        btn1.setSize(294,32);
+        btn1.setLocation(147, 235);
         panel.add(btn1);
 
         btn1.addActionListener(new ActionListener() {
@@ -407,6 +478,10 @@ public class Ventana extends JFrame {
             }
         });
 
+        panel.add(etiqueta);
+
+        panel.repaint();
+        panel.revalidate();
         return panel;
     }
 
@@ -577,9 +652,19 @@ public class Ventana extends JFrame {
         panel.setLayout(null);
         panel.setBackground(Color.decode("#D0E6A5"));
 
+
+        //Imagen de fondo
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/crearUsuario.png");
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+
+        // Agrega la etiqueta al panel
+        etiqueta.setSize(600, 600);
+        etiqueta.setLocation(-8, -40);
+
         JButton btnAdd = new JButton("Crear un usuario ahora");
-        btnAdd.setSize(250,40);
-        btnAdd.setLocation(120, 390);
+        btnAdd.setSize(294,32);
+        btnAdd.setLocation(146, 437);
         panel.add(btnAdd);
 
         btnAdd.addActionListener(new ActionListener() {
@@ -590,6 +675,11 @@ public class Ventana extends JFrame {
             }
 
         });
+
+        panel.add(etiqueta);
+
+        panel.revalidate();
+        panel.repaint();
         return panel;
     }
 }
