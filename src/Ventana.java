@@ -1,9 +1,11 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Ventana extends JFrame {
     private JPanel panelActual;
@@ -432,9 +434,14 @@ public class Ventana extends JFrame {
                         escritor.close();
 
                         JOptionPane.showMessageDialog(null, "Datos modificados");
+                        nombreUsuario = tf2.getText();
+                        cambiarPanel(cuenta());
                     } else {
                         JOptionPane.showMessageDialog(null, "Verificar datos");
+
                     }
+
+
 
                 } catch (IOException e2) {
                     e2.printStackTrace();
@@ -515,8 +522,41 @@ public class Ventana extends JFrame {
                 btn1.setText("Editar a "+selectedData);
             }
         });
-
+        //IMAGEN DE FONDO
         panel.add(etiqueta);
+
+        //TABLA ------------------------------------------------------------------------------------------------------------------------------------------------
+
+        // Crear modelo de la tabla
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Nombre");
+        model.addColumn("Usuario");
+        model.addColumn("Correo");
+        model.addColumn("Password");
+
+        // Leer datos del archivo y añadirlos al modelo de la tabla
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("proyecto-unidad-2/users.txt"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                model.addRow(data);
+            }
+            br.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // Crear la tabla
+        JTable table = new JTable(model);
+
+        // Añadir la tabla a un JScrollPane para poder hacer scroll si es necesario
+        JScrollPane scrollPane = new JScrollPane(table);
+        panel.add(scrollPane);
+        
+        //FIN TABLA --------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
         panel.repaint();
         panel.revalidate();
@@ -700,9 +740,24 @@ public class Ventana extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 cambiarPanel(panelAnterior);
 
+            }
+
+        });
+
+        JButton btn2 = new JButton("Crear usuario");
+        btn2.setSize(130, 22);
+        btn2.setLocation(319, 482);
+        panel.add(btn2);
+
+        btn2.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cambiarPanel(panelAnterior);
+
                 try {
 
-                    File file = new File("users.txt");
+                    File file = new File("proyecto-unidad-2/users.txt");
                     BufferedReader lector = new BufferedReader(new FileReader(file));
 
                     String linea;
@@ -723,6 +778,7 @@ public class Ventana extends JFrame {
                             escritor.close();
 
                             JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
+                            cambiarPanel(acceder());
                             break;
                         }
 
@@ -731,20 +787,6 @@ public class Ventana extends JFrame {
                 } catch (IOException e2) {
                     e2.printStackTrace();
                 }
-
-            }
-
-        });
-
-        JButton btn2 = new JButton("Crear usuario");
-        btn2.setSize(130, 22);
-        btn2.setLocation(319, 482);
-        panel.add(btn2);
-
-        btn2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
             }
 
