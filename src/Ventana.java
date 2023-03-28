@@ -9,6 +9,10 @@ public class Ventana extends JFrame {
     private JPanel panelActual;
     private JPanel panelAnterior;
     String nombreUsuario = "";
+
+    String nombreUsuarioDos = "";
+
+    String usuarioSeleccionado = "";
     String passUsuario = "";
     private JComboBox<String> comboBox;
     private ArrayList<String> data = new ArrayList<>();
@@ -334,30 +338,47 @@ public class Ventana extends JFrame {
         panel.setLayout(null);
         panel.setBackground(Color.pink);
 
+        JLabel bienvenida = new JLabel("Modificar " + nombreUsuario + "");
+        bienvenida.setSize(800, 40);
+        bienvenida.setLocation(200, 18);
+        bienvenida.setForeground(Color.decode("#D0E6A5"));
+        bienvenida.setFont( new Font( "Inter",Font.PLAIN,22));
+        panel.add(bienvenida);
+
         JTextField tf1 = new JTextField();
-        tf1.setSize(250, 40);
-        tf1.setLocation(120, 100);
+        tf1.setSize(294, 22);
+        tf1.setLocation(147, 99);
         panel.add(tf1);
 
         JTextField tf2 = new JTextField();
-        tf2.setSize(250, 40);
-        tf2.setLocation(120, 150);
+        tf2.setSize(294, 22);
+        tf2.setLocation(147, 166);
         panel.add(tf2);
 
         JTextField tf3 = new JTextField();
-        tf3.setSize(250, 40);
-        tf3.setLocation(120, 200);
+        tf3.setSize(294, 22);
+        tf3.setLocation(147, 238);
         panel.add(tf3);
 
         JTextField tf4 = new JTextField();
-        tf4.setSize(250, 40);
-        tf4.setLocation(120, 250);
+        tf4.setSize(294, 22);
+        tf4.setLocation(147, 316);
         panel.add(tf4);
 
         JButton btn1 = new JButton("Cancelar");
-        btn1.setSize(250, 40);
-        btn1.setLocation(50, 300);
+        btn1.setSize(130, 22);
+        btn1.setLocation(146, 442);
         panel.add(btn1);
+
+        //Imagen de fondo
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/editarUsuarios.png");
+
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+
+        // Agrega la etiqueta al panel
+        etiqueta.setSize(600, 600);
+        etiqueta.setLocation(-8, -40);
 
         btn1.addActionListener(new ActionListener() {
 
@@ -369,8 +390,8 @@ public class Ventana extends JFrame {
         });
 
         JButton btn2 = new JButton("Actualizar Datos");
-        btn2.setSize(250, 40);
-        btn2.setLocation(300, 300);
+        btn2.setSize(130, 22);
+        btn2.setLocation(311, 442);
         panel.add(btn2);
 
         btn2.addActionListener(new ActionListener() {
@@ -379,7 +400,7 @@ public class Ventana extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 try {
 
-                    File file = new File("users.txt");
+                    File file = new File("proyecto-unidad-2/users.txt");
                     BufferedReader lector = new BufferedReader(new FileReader(file));
 
                     String linea;
@@ -425,6 +446,8 @@ public class Ventana extends JFrame {
 
         });
 
+        panel.add(etiqueta);
+
         return panel;
     }
 
@@ -468,7 +491,9 @@ public class Ventana extends JFrame {
         comboBox.setSize(294, 22);
         comboBox.setLocation(147, 192);
 
-        String usuarioSeleccionado = (String) comboBox.getSelectedItem();
+        usuarioSeleccionado = (String) comboBox.getSelectedItem();
+
+        System.out.println("Combo" +usuarioSeleccionado);
 
         panel.add(comboBox);
 
@@ -508,29 +533,54 @@ public class Ventana extends JFrame {
         panel.setBackground(Color.decode("#eeeeee"));
 
         JTextField tf1 = new JTextField();
-        tf1.setSize(250, 40);
-        tf1.setLocation(120, 100);
+        tf1.setSize(294, 22);
+        tf1.setLocation(147, 99);
         panel.add(tf1);
 
         JTextField tf2 = new JTextField();
-        tf2.setSize(250, 40);
-        tf2.setLocation(120, 150);
+        tf2.setSize(294, 22);
+        tf2.setLocation(147, 166);
         panel.add(tf2);
 
         JTextField tf3 = new JTextField();
-        tf3.setSize(250, 40);
-        tf3.setLocation(120, 200);
+        tf3.setSize(294, 22);
+        tf3.setLocation(147, 238);
         panel.add(tf3);
 
         JTextField tf4 = new JTextField();
-        tf4.setSize(250, 40);
-        tf4.setLocation(120, 250);
+        tf4.setSize(294, 22);
+        tf4.setLocation(147, 316);
         panel.add(tf4);
 
+        /*
+        JTextField tf5 = new JTextField();
+        tf5.setSize(294, 22);
+        tf5.setLocation(155, 431);
+        panel.add(tf5);
+         */
+
         JButton btn1 = new JButton("Cancelar");
-        btn1.setSize(250, 40);
-        btn1.setLocation(50, 300);
+        btn1.setSize(130, 22);
+        btn1.setLocation(146, 442);
         panel.add(btn1);
+
+        //Imagen de fondo
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/editarUsuarios.png");
+
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+
+        // Agrega la etiqueta al panel
+        etiqueta.setSize(600, 600);
+        etiqueta.setLocation(-8, -40);
+
+        JLabel bienvenida = new JLabel("Editar a " + nombreUsuarioDos);
+        System.out.println("editar: "+ nombreUsuarioDos);
+        bienvenida.setSize(800, 40);
+        bienvenida.setLocation(220, 24);
+        bienvenida.setForeground(Color.decode("#D0E6A5"));
+        bienvenida.setFont( new Font( "Inter",Font.PLAIN,20));
+        panel.add(bienvenida);
 
         btn1.addActionListener(new ActionListener() {
 
@@ -542,8 +592,8 @@ public class Ventana extends JFrame {
         });
 
         JButton btn2 = new JButton("Actualizar Datos");
-        btn2.setSize(250, 40);
-        btn2.setLocation(300, 300);
+        btn2.setSize(130, 22);
+        btn2.setLocation(311, 442);
         panel.add(btn2);
 
         btn2.addActionListener(new ActionListener() {
@@ -565,6 +615,7 @@ public class Ventana extends JFrame {
 
         });
 
+        panel.add(etiqueta);
         return panel;
     }
 
@@ -597,38 +648,50 @@ public class Ventana extends JFrame {
     public JPanel crearUsuario() {
         JPanel panel = new JPanel();
         panel.setSize(600, 600);
-        panel.setLocation(0, 0);
+        panel.setLocation(-8, -40);
         panel.setLayout(null);
         panel.setBackground(Color.BLUE);
 
+        //Imagen de fondo
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/crearUsuarios.png");
+
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+
+        // Agrega la etiqueta al panel
+        etiqueta.setSize(600, 600);
+        etiqueta.setLocation(0, 0);
+
         JTextField tf1 = new JTextField();
-        tf1.setSize(250, 40);
-        tf1.setLocation(120, 100);
+        tf1.setSize(294, 22);
+        tf1.setLocation(155, 139);
         panel.add(tf1);
 
         JTextField tf2 = new JTextField();
-        tf2.setSize(250, 40);
-        tf2.setLocation(120, 150);
+        tf2.setSize(294, 22);
+        tf2.setLocation(155, 206);
         panel.add(tf2);
 
         JTextField tf3 = new JTextField();
-        tf3.setSize(250, 40);
-        tf3.setLocation(120, 200);
+        tf3.setSize(294, 22);
+        tf3.setLocation(155, 278);
         panel.add(tf3);
 
         JTextField tf4 = new JTextField();
-        tf4.setSize(250, 40);
-        tf4.setLocation(120, 250);
+        tf4.setSize(294, 22);
+        tf4.setLocation(155, 356);
         panel.add(tf4);
 
         JTextField tf5 = new JTextField();
-        tf5.setSize(250, 40);
-        tf5.setLocation(120, 300);
+        tf5.setSize(294, 22);
+        tf5.setLocation(155, 431);
         panel.add(tf5);
 
+
+
         JButton btn1 = new JButton("Cancelar");
-        btn1.setSize(250, 40);
-        btn1.setLocation(50, 350);
+        btn1.setSize(130, 22);
+        btn1.setLocation(154, 482);
         panel.add(btn1);
 
         btn1.addActionListener(new ActionListener() {
@@ -636,13 +699,46 @@ public class Ventana extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cambiarPanel(panelAnterior);
+
+                try {
+
+                    File file = new File("users.txt");
+                    BufferedReader lector = new BufferedReader(new FileReader(file));
+
+                    String linea;
+                    String  usuarioExistente = tf2.getText();
+                    boolean usuarioEncontrado = false;
+
+                    while ((linea = lector.readLine()) != null) {
+                        String[] campo = linea.split(",");
+
+                        //VERIFICA SI EL USUARIO EXISTE
+                        if (campo[1].equals(usuarioExistente)) {
+                            JOptionPane.showMessageDialog(null, "El nombre de usuario ya existe");
+                            break;
+                        } else {
+                            BufferedWriter escritor = new BufferedWriter(new FileWriter(file, true));
+                            escritor.write(tf1.getText() + "," + tf2.getText() + "," + tf3.getText() + "," + tf4.getText());
+                            escritor.newLine();
+                            escritor.close();
+
+                            JOptionPane.showMessageDialog(null, "Usuario agregado correctamente");
+                            break;
+                        }
+
+                    }
+                    lector.close();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                }
+
             }
 
         });
 
-        JButton btn2 = new JButton("crear usuario");
-        btn2.setSize(250, 40);
-        btn2.setLocation(300, 350);
+        JButton btn2 = new JButton("Crear usuario");
+        btn2.setSize(130, 22);
+        btn2.setLocation(319, 482);
         panel.add(btn2);
 
         btn2.addActionListener(new ActionListener() {
@@ -653,6 +749,8 @@ public class Ventana extends JFrame {
             }
 
         });
+
+        panel.add(etiqueta);
 
         return panel;
     }

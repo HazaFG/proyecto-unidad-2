@@ -20,24 +20,38 @@ public class Splash extends JDialog {
 
     //PROPIEDADES ELEMENTOS
     private void inicio() {
-        JLabel l1 = new JLabel("Splash Screen");
-        l1.setFont(new Font("Tahoma", Font.PLAIN,18));
+
+        //Imagen de fondo
+        ImageIcon imagen = new ImageIcon("proyecto-unidad-2/imagenes/splash.png");
+        // Crea el objeto JLabel
+        JLabel etiqueta = new JLabel(imagen);
+
+        // Agrega la etiqueta al panel
+        etiqueta.setSize(600, 600);
+        etiqueta.setLocation(0, 0);
+
+        JLabel l1 = new JLabel();
+        l1.setFont(new Font("Inter", Font.PLAIN,18));
         l1.setBounds(49,11,147,32);
         getContentPane().add(l1);
 
         barra = new JProgressBar();
-        barra.setBounds(26,54,229,32);
+        barra.setBounds(154,397,294,22);
+        barra.setOpaque(true);
+        barra.setForeground(Color.decode("#3E4532"));
         getContentPane().add(barra);
 
         porcentaje = new JLabel("0%");
-        porcentaje.setFont(new Font("Tahoma", Font.PLAIN,18));
-        porcentaje.setBounds(206,23,46,14);
+        porcentaje.setFont(new Font("Inter", Font.PLAIN,18));
+        porcentaje.setBounds(280,355,46,14);
         getContentPane().add(porcentaje);
 
         l2 = new JLabel();
         l2.setFont(new Font("Tahoma", Font.PLAIN,18));
-        l2.setBounds(50,50,100,100);
+        l2.setBounds(260,310,300,300);
         getContentPane().add(l2);
+
+        getContentPane().add(etiqueta);
     }
 
     private void inicioHilo(){
@@ -57,18 +71,9 @@ public class Splash extends JDialog {
 
                         //MENSAJES DE CARGA
                         if(x==5){
-                            texto="Le recomendamos tomar matcha";
-                            l2.setText(texto);
-                        } else if (x==25){
                             texto="Cargando...";
                             l2.setText(texto);
                         } else if (x==50){
-                            texto="Alt + F4";
-                            l2.setText(texto);
-                        } else if (x==75){
-                            texto="jijijija";
-                            l2.setText(texto);
-                        } else if (x==95){
                             texto="Iniciando...";
                             l2.setText(texto);
                         }
