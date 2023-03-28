@@ -155,11 +155,24 @@ public class Ventana extends JFrame {
         JTextField tf1 = new JTextField();
         tf1.setSize(267, 28);
         tf1.setLocation(167, 307);
+
+        //PLACEHOLDER
+        TextPrompt placeholder = new TextPrompt("Usuario", tf1);
+        placeholder.changeAlpha(0.75f);
+        placeholder.changeStyle(Font.ITALIC);
+
+        //LO METEMOS
         panel.add(tf1);
 
         JPasswordField pass = new JPasswordField();
         pass.setSize(267, 28);
         pass.setLocation(167, 384);
+
+        //PLACEHOLDER
+        TextPrompt placeholderPass = new TextPrompt("Password", pass);
+        placeholderPass.changeAlpha(0.75f);
+        placeholderPass.changeStyle(Font.ITALIC);
+
         panel.add(pass);
 
         JButton cancelar = new JButton("Cancelar");
